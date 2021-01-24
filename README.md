@@ -1,7 +1,7 @@
 ### Hi there 👋  
 
-⚡ Welcome to GithHub repository of [Panchal Programming Academy](https://panchalprogrammingacademy.herokuapp.com/)  
-We create online courses to teach programming-languages and we also provide full support web-apps and desktop-apps.  
-To know more about us feel free to catch us at:  
+⚡ Welcome to GithHub account of [Panchal Programming Academy](https://panchalprogrammingacademy.github.io/panchalprogrammingacademy/)  
+We offer online courses where we teach programming in simplest possible way.  
+To know more about us feel free to get in touch via:  
 ✉️ Email: panchalprogrammingacademy@gmail.com, shubhampanchal9773@gmail.com  
-🌐 https://panchalprogrammingacademy.herokuapp.com/  
+🌐 https://panchalprogrammingacademy.github.io/panchalprogrammingacademy/  

@@ -54,10 +54,8 @@ export default function Homepage(props){
         sendEmail(receciver, subject, text, '').then(response => {
             addToast('Your message was successfully delivered', {'appearance': 'success', 'autoDismiss': false});
         }).catch(error => {
-            console.log(error);
-            console.log(error.response);
-            // let errorMessage = error.response.data.error;
-            // addToast(errorMessage, {'appearance': 'error', 'autoDismiss': false});
+            let errorMessage = String(error.response.data.error);
+            addToast(errorMessage, {'appearance': 'error', 'autoDismiss': false});
         })
     }
     return (
