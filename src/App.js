@@ -1,12 +1,16 @@
 import React from 'react';
 import Homepage from './components/Homepage';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { ToastProvider } from 'react-toast-notifications';
+
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Route path="/" component={Homepage} />
-      </Router>
+      <ToastProvider>
+        <Router>
+          <Route path="/" component={Homepage} />
+        </Router>
+      </ToastProvider>
     </div>
   );
 }

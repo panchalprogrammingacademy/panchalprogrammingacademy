@@ -3,25 +3,62 @@ import BrandIcon from '../images/brand.png';
 import FounderIcon from '../images/shubham.jpeg';
 import LinkedInIcon from '../images/linkedin.png';
 import GitHubIcon from '../images/github.png';
-import BloggerIcon from '../images/blogger.png';
+// import BloggerIcon from '../images/blogger.png';
 import ExternalLink from './ExternalLink';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faTimes, faBars} from '@fortawesome/free-solid-svg-icons';
 import '../styles/homepage.scss';
-export default function Homepage(props){
+import {sendEmail} from '../DataAccessObject/DataAccessObject';
+import { useToasts } from 'react-toast-notifications';
 
+
+// used to validate email
+function validateEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+// functional component
+export default function Homepage(props){
     const [isVisible, setIsVisible] = useState(true);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const { addToast } = useToasts();
     useEffect(function(){
         window.addEventListener('resize', event => {
             setIsVisible(window.innerWidth > 990)
         });
     }, []);
-
-    const onClickNavbarItem = (event) => {
+    const onSubmitFormHandler = (event) => {
         event.preventDefault();
-        let id = event.target.getAttribute('id');
-        let link = document.getElementById(id);
-        console.log(link);
+        if (name.trim() === '') return addToast('Please provide your name', {'appearance': 'error', 'autoDismiss': false});
+        if (!validateEmail(email))  return addToast('Please provide a valid email', {'appearance': 'error', 'autoDismiss': false});
+        if (message.trim() === '')  return addToast('Please provde a message', {'appearance': 'error', 'autoDismiss': false});
+        let username = name.trim();
+        let useremail = email.toLowerCase();
+        let usermessage = message.trim();
+        // send the message to user
+        addToast('Your message is on the way', {'appearance': 'info', 'autoDismiss': false});
+        setName(''); setEmail(''); setMessage('');
+        let receciver = 'shubhampanchal9773@gmail.com';
+        let subject = 'Panchal Programming Academy';
+        let text = `Hello Shubham Panchal,\n` + 
+                    `Mr./Mrs. ${username} sent you a message.\n` + 
+                    `${usermessage}\n` + 
+                    `You can reach out to the concerned person via ${useremail}\n` + 
+                    `NOTE: This is an auto-generated email. Please do not reply to this email.\n` + 
+                    `Thanks & Regards,\n` + 
+                    `Panchal Programming Academy\n` + 
+                    `https://panchalprogrammingacademy.github.io/panchalprogrammingacademy/\n`;
+        sendEmail(receciver, subject, text, '').then(response => {
+            addToast('Your message was successfully delivered', {'appearance': 'success', 'autoDismiss': false});
+        }).catch(error => {
+            console.log(error);
+            console.log(error.response);
+            // let errorMessage = error.response.data.error;
+            // addToast(errorMessage, {'appearance': 'error', 'autoDismiss': false});
+        })
     }
     return (
         <div id="homepage">
@@ -34,11 +71,11 @@ export default function Homepage(props){
                 </div>
                 {isVisible && 
                 <div className="navbar-links">
-                    <ExternalLink to="#about" onClick={onClickNavbarItem}>About</ExternalLink>
-                    <ExternalLink to="#services" onClick={onClickNavbarItem}>Services</ExternalLink>
-                    <ExternalLink to="#courses" onClick={onClickNavbarItem}>Courses</ExternalLink>
-                    <ExternalLink to="#articles" onClick={onClickNavbarItem}>Articles</ExternalLink>
-                    <ExternalLink to="#contact" onClick={onClickNavbarItem}>Contact</ExternalLink>
+                    <ExternalLink to="#about">About</ExternalLink>
+                    <ExternalLink to="#services">Services</ExternalLink>
+                    <ExternalLink to="#courses">Courses</ExternalLink>
+                    {/* <ExternalLink to="#articles">Articles</ExternalLink> */}
+                    <ExternalLink to="#contact">Contact</ExternalLink>
                 </div>}
             </div>
             <div className="home">
@@ -124,22 +161,25 @@ export default function Homepage(props){
                             <ExternalLink external={true} to="https://www.linkedin.com/company/30187120/">
                                 <img src={LinkedInIcon} alt="" />
                             </ExternalLink>
-                            <ExternalLink external={true} to="/">
+                            {/* <ExternalLink external={true} to="/">
                                 <img src={BloggerIcon} alt="" />
-                            </ExternalLink>
+                            </ExternalLink> */}
                         </div>
                     </div>
                     <div className="col">
                         <fieldset>
                             <legend>Let's chat</legend>
                             <form action="/" method="post" autoComplete="off"
-                                className="contact-form">
+                                className="contact-form" onSubmit={onSubmitFormHandler}>
                                 <input type="text" placeholder="Name"
-                                    className="text-field" required />
+                                    className="text-field"  
+                                    value={name} onChange={event => setName(event.target.value)}/>
                                 <input type="email" placeholder="Email"
-                                    className="text-field" required />
-                                <textarea className="text-area" required
-                                    placeholder="Message"></textarea>
+                                    className="text-field"  
+                                    value={email} onChange={event => setEmail(event.target.value)}/>
+                                <textarea className="text-area" 
+                                    placeholder="Message"
+                                    value={message} onChange={event => setMessage(event.target.value)}></textarea>
                                 <button className="submit">Submit</button>
                             </form>
                         </fieldset>
