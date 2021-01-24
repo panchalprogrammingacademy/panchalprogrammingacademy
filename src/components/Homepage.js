@@ -52,9 +52,10 @@ export default function Homepage(props){
                     `Panchal Programming Academy\n` + 
                     `https://panchalprogrammingacademy.github.io/panchalprogrammingacademy/\n`;
         sendEmail(receciver, subject, text, '').then(response => {
-            addToast('Your message was successfully delivered', {'appearance': 'success', 'autoDismiss': false});
+            let message = response.data.message;
+            addToast(message, {'appearance': 'success', 'autoDismiss': false});
         }).catch(error => {
-            let errorMessage = String(error.response.data.error);
+            let errorMessage = String(error.response.data.message);
             addToast(errorMessage, {'appearance': 'error', 'autoDismiss': false});
         })
     }
