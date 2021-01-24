@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/panchalprogrammingacademy/static/css/main.253e56fd.chunk.css",
-    "main.js": "/panchalprogrammingacademy/static/js/main.544262b6.chunk.js",
-    "main.js.map": "/panchalprogrammingacademy/static/js/main.544262b6.chunk.js.map",
+    "main.js": "/panchalprogrammingacademy/static/js/main.68cad6bc.chunk.js",
+    "main.js.map": "/panchalprogrammingacademy/static/js/main.68cad6bc.chunk.js.map",
     "runtime-main.js": "/panchalprogrammingacademy/static/js/runtime-main.b3ec5b8a.js",
     "runtime-main.js.map": "/panchalprogrammingacademy/static/js/runtime-main.b3ec5b8a.js.map",
     "static/js/2.7f54714c.chunk.js": "/panchalprogrammingacademy/static/js/2.7f54714c.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.b3ec5b8a.js",
     "static/js/2.7f54714c.chunk.js",
     "static/css/main.253e56fd.chunk.css",
-    "static/js/main.544262b6.chunk.js"
+    "static/js/main.68cad6bc.chunk.js"
   ]
 }
